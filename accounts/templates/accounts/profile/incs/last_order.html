@@ -1,0 +1,36 @@
+{% load humanize %}
+<div class="divider-12 parent-float-fix">
+    <div class="divider-12 float-right bg-dark px-2 py-2" style="border-radius: 12px">
+        <div class="parent-float-fix my-2 ">
+            {% for uo in user_orders.all %}
+                {% for v in uo.rel_order_items.all %}
+                    <div class="float-left my-2">
+                        <div class="container">
+                            <div class="box">
+                                <a href="{{ v.variant.watch.get_absolute_url }}" style="color: unset">
+                                    {% for img in v.variant.watch.rel_watch_images.all %}
+                                        {% if img.is_main %}
+                                            <img src="{{ img.image.url }}" height="55%" class="card-img-top rounded"
+                                                 style="object-fit: cover"
+                                                 alt="{{ v.brand }}-{{ v.name }}">
+                                        {% endif %}
+                                    {% endfor %}
+                                    <div>
+                                        <strong class="text-warning">{{ v.variant.watch.brand }} {{ v.variant.watch.name }}</strong>
+                                        <p class="text-light">
+                                            {{ v.variant.watch.min_price|intcomma }} TMN
+                                        </p>
+                                        <div class="parent-float-fix">
+                                            <div class="float-left divider-12"
+                                                 style="background-color: #{{ v.variant.face_color.hex_color }}; height: 4px; margin-right: 5px"></div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>

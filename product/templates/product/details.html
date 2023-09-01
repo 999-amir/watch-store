@@ -1,0 +1,195 @@
+<!-- load ======================================================================= -->
+{% extends 'base.html' %}
+{% load static %}
+<!-- title ====================================================================== -->
+{% block title %}
+    {{ watch.brand }} {{ watch.name }}
+{% endblock %}
+<!-- image title ================================================================ -->
+{% block img_title %}
+    <link rel="icon" href="{{ watch.brand.image.url }}">
+{% endblock %}
+<!-- css ======================================================================== -->
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/product.css' %}">
+    <link rel="stylesheet" href="{% static 'css/radios_buttom.css' %}">
+    <link rel="stylesheet" href="{% static 'css/buy_cart.css' %}">
+{% endblock %}
+<!-- body content =============================================================== -->
+{% block content %}
+    <!-- carousel & buy cart % summary information & text information -->
+    <div class="parent-float-fix mt-5">
+        <!-- carousel -->
+        <div class="divider-3 float-right card responsive-2-1">
+            {% include 'product/incs/details/carousel.html' %}
+        </div>
+        <!--end carousel-->
+        <div class="divider-9 float-left responsive-2-1">
+            <div class="parent-float-fix divider-12">
+                <!-- buy cart -->
+                <div class="divider-5 float-left responsive-2-1">
+                    {% include 'product/incs/details/buy_cart.html' %}
+                </div>
+                <!-- end buy cart -->
+                <!-- summary information -->
+                <div class="divider-5 float-left mt-5 mx-5 responsive-2-7" style="direction: rtl">
+                    {% include 'product/incs/details/summary_info.html' %}
+                </div>
+                <!-- end summary information -->
+            </div>
+            <!-- watch text information -->
+            <div class="divider-11 float-left mt-3 border border-light rounded p-3 responsive-2-1" style="direction: rtl">
+                {{ watch.info|safe }}
+            </div>
+            <!-- end watch text information -->
+        </div>
+    </div>
+    <!-- end carousel & buy cart % summary information & text information -->
+
+    <!-- same brand -->
+    <div class="parent-float-fix">
+        <br>
+        <div class="divider-12 mt-5">
+            <p class="text-light px-5 mb-0" style="direction: rtl">دیگر محصولات از این برند</p>
+            <div class="A-underline-card mx-4"></div>
+        </div>
+        <div class="divider-12">
+            {% include 'product/incs/details/cards_details.html' %}
+        </div>
+    </div>
+    <!-- end same brand -->
+
+    <!-- all information -->
+    <div class="parent-float-fix">
+        <div class="divider-12">
+            <br>
+            <p class="text-light px-5 mb-0" style="direction: rtl">اطلاعات کامل</p>
+            <div class="A-underline-card mx-4">
+                {% include 'product/incs/details/all_information.html' %}
+            </div>
+        </div>
+    </div>
+    <!-- end all information -->
+
+
+    <!-- chart js -->
+    <div class="parent-float-fix">
+        <div class="divider-12">
+            <p class="text-light px-5 mb-0" style="direction: rtl">نمودار تغییرات قیمت</p>
+            <div class="A-underline-card mx-4"></div>
+            <div>
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <!-- end chart js -->
+
+
+    <!-- comments -->
+    <div class="parent-float-fix" style="direction: ltr">
+        <div class="divider-12">
+            <p class="text-light px-5 mb-0" style="direction: rtl">بخش نظرات</p>
+            <div class="A-underline-card mx-4">
+
+
+                <div class="divider-12 parent-float-fix mb-3">
+                    <div class="divider-12 float-left mt-3">
+                        <div class="divider-4 float-left" style="height: 1px"></div>
+                        <div class="divider-4 float-left bg-dark p-3 rounded responsive-2-9"
+                             style="margin-bottom: 2rem">
+                            {% if user.is_authenticated %}
+                                <h5 class="text-light responsive-2-10" style="direction: rtl">ثبت نظر :</h5>
+                                <form method="post">{% csrf_token %}
+                                    <textarea name="text"
+                                              class="form-control bg-dark text-light w-100 mb-2 responsive-2-10 responsive-2-11"
+                                              style="height: 10rem"></textarea>
+                                    <button type="submit" class="btn btn-outline-success w-100 responsive-2-10">ثبت
+                                    </button>
+                                </form>
+                            {% else %}
+                                <h6 class="text-light responsive-2-10" style="direction: rtl">لطفا برای ثبت نظر در سایت ثبت نام کنید</h6>
+                            {% endif %}
+                        </div>
+                        <div class="divider-4 float-left" style="height: 1px"></div>
+                    </div>
+                    <div class="divider-12 float-left my-3" style="height: 4px; background-color: #AC3931"></div>
+
+
+
+                    {% for c in comments %}
+                            <div class="divider-9 float-left mt-3 responsive-2-12">
+                            <div class="float-left p-3 rounded responsive-2-13"
+                                 style="margin-bottom: 2rem; background-color: #CC3F0C; width: 30%">
+                                <h5 class="text-light responsive-2-10" style="direction: rtl">{{ c.user.f_name }} {{ c.user.l_name }} :</h5>
+                                <p class="text-light" style="direction: rtl">{{ c.text }}</p>
+                            </div>
+                            <div class="float-left" style="height: 1px; width: 3%"></div>
+                            {% for rc in c.rel_replies.all %}
+                                {% if rc.can_show %}
+                                <div class="float-left p-3 rounded responsive-2-13"
+                                     style="margin-bottom: 2rem; background-color: #0B3954; width: 30%; direction: rtl">
+                                    <h5 class="text-light responsive-2-10" style="direction: rtl">{{ rc.user.f_name }} {{ rc.user.l_name }} :</h5>
+                                    <p class="text-light" style="word-wrap: break-word;" style="direction: rtl">{{ rc.text }}</p>
+                                </div>
+                                <div class="float-left" style="height: 1px; width: 3%"></div>
+                                {% endif %}
+                            {% endfor %}
+
+
+                    </div>
+                        <div class="divider-3 float-left mt-3 responsive-2-9" style="direction: rtl">
+
+                            {% if user.is_authenticated %}
+                                <h5 class="text-light responsive-2-10" style="direction: rtl">ثبت پاسخ :</h5>
+                                <form method="post"
+                                      action="{% url 'product:reply' c.product.id c.id %}">{% csrf_token %}
+                                    <textarea name="text"
+                                              class="form-control bg-dark text-light w-100 mb-2 responsive-2-10 responsive-2-11"
+                                              style="height: 10rem" style="direction: rtl"></textarea>
+                                    <button type="submit" class="btn btn-outline-success w-100 responsive-2-10">ثبت
+                                    </button>
+                                </form>
+                            {% else %}
+                                <h6 class="text-light" style="direction: rtl">لطفا برای ثبت نظر در سایت ثبت نام کنید</h6>
+                            {% endif %}
+                        </div>
+                        <div class="divider-12 float-left my-3" style="height: 4px; background-color: #AC3931"></div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div></div>
+        </div>
+    </div>
+    <!-- end comments -->
+{% endblock %}
+<!-- js ========================================================================= -->
+{% block script %}
+    {#    chart js#}
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [{% for p in selected_watch.rel_variant_price_chart.all %}'{{ p.fa_date }}', {% endfor %}],
+                datasets: [{
+                    label: '{{ selected_watch.watch.brand }} {{ selected_watch.watch.name }}',
+                    data: [{% for p in selected_watch.rel_variant_price_chart.all %}{{ p.price }}, {% endfor %}],
+                    borderWidth: 1,
+                    borderColor: '#{{ selected_watch.face_color.hex_color }}',
+                    backgroundColor: '#{{ selected_watch.face_color.hex_color }}',
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    {#  end chart js#}
+
+    <script src="{% static 'js/product.js' %}"></script>
+{% endblock %}

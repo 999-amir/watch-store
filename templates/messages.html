@@ -1,0 +1,17 @@
+{% if messages %}
+    {% for msg in messages %}
+        <div class="toast-container position-fixed bottom-0 end-0 p-3 responsive-4-2" id="js-messages">
+            <div class="toast fade show rounded responsive-4-1" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header text-dark border-dark {% if msg.tags %}{{ msg.tags }}{% endif %}">
+                    <strong class="me-auto" style="font-weight: bold">پیام جدید</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="w-100"></div>
+                <div class="toast-body text-dark {% if msg.tags %}{{ msg.tags }}{% endif %}"
+                     style="border-radius: 0 0 4px 4px; direction: rtl; font-weight: bold">
+                    {{ msg }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

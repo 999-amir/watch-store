@@ -1,0 +1,73 @@
+{% load product_template_filter %}
+{% load humanize %}
+<div class="parent-float-fix my-2">
+    {% for wr in watches_required %}
+            <a href="{{ wr.get_absolute_url }}" style="color: unset">
+                <div class="float-left my-2">
+                    <div class="container">
+                        <div class="box">
+
+                            {% for img in wr.rel_watch_images.all %}
+                                {% if img.is_main %}
+                                    <img src="{{ img.image.url }}" height="60%" class="card-img-top rounded"
+                                         style="object-fit: cover"
+                                         alt="{{ wr.brand }}-{{ wr.name }}">
+                                {% endif %}
+                            {% endfor %}
+
+                            <div>
+                                {% if wr.lowest_quantity %}
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger responsive-9">
+                            {{ wr.lowest_quantity }}
+                        </span>
+                                {% endif %}
+                                <strong class="text-warning">{{ wr.brand }} {{ wr.name }}</strong>
+                                <p class="text-light">
+                                    {{ wr.min_price|intcomma }} TMN
+                                </p>
+                                <span class="text-light responsive-7">نوع موتور : {{ wr.system }}</span>
+                                {% if wr.variant_discount_min_price %}
+                                    <span class="badge text-bg-info responsive-7">{{ wr.variant_discount_min_price }}%</span>{% endif %}
+
+                                <div class="parent-float-fix">
+                                    {% for c in wr.rel_watch_variants.all %}
+                                        <div class="float-left divider-2 responsive-8"
+                                             style="background-color: #{{ c.face_color.hex_color }}; height: 4px; margin-right: 5px"></div>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+    {% endfor %}
+</div>
+<div class="parent-float-fix my-2">
+<hr class="text-light bold" style="margin-top: 23%">
+{% for wur in watches_unrequired %}
+            <a href="{{ wur.get_absolute_url }}" style="color: unset">
+                <div class="float-left my-2">
+                    <div class="container">
+                        <div class="box">
+
+                            {% for img in wur.rel_watch_images.all %}
+                                {% if img.is_main %}
+                                    <img src="{{ img.image.url }}" height="60%" class="card-img-top rounded"
+                                         style="object-fit: cover; filter: grayscale(100%)"
+                                         alt="{{ wur.brand }}-{{ wur.name }}">
+                                {% endif %}
+                            {% endfor %}
+                            <div>
+                                <strong class="text-secondary">{{ wur.brand }} {{ wur.name }}</strong>
+                                <p class="text-danger">
+                                    فروخته شد
+                                </p>
+                                <span class="text-secondary">نوع موتور : {{ wur.system }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+{% endfor %}
+</div>

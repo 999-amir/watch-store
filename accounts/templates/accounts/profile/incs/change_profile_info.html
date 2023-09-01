@@ -1,0 +1,84 @@
+{% load humanize %}
+<div class="divider-12 parent-float-fix" data-bs-theme="dark">
+    <div class="divider-12 float-right bg-dark px-2 py-2" style="border-radius: 12px">
+        <div class="parent-float-fix my-2 ">
+            <form method="post" action="{% url 'accounts:change_info_profile' %}">{% csrf_token %}
+                <div class="divider-12 parent-float-fix">
+                    <div class="float-left responsive-2-12" style="width: 49%">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text responsive-3-17" id="basic-addon1">نام</span>
+                            <input type="text" class="form-control responsive-3-17" value="{{ user.f_name }}" aria-label="Username"
+                                   aria-describedby="basic-addon1" name="f_name">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text responsive-3-17" id="basic-addon1">نام خانوادگی</span>
+                            <input type="text" class="form-control responsive-3-17" value="{{ user.l_name }}" aria-label="Username"
+                                   aria-describedby="basic-addon1" name="l_name">
+                        </div>
+                    </div>
+                    <div class="float-left" style="height: 1px; width: 2%"></div>
+                    <div class="float-left responsive-2-12" style="width: 49%">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text responsive-3-17" id="basic-addon1">ایمیل</span>
+                            <input type="text" class="form-control responsive-3-17" value="{{ user.email }}" aria-label="Username"
+                                   aria-describedby="basic-addon1" name="email">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text responsive-3-17" id="basic-addon1">کد پستی</span>
+                            <input type="text" class="form-control responsive-3-17"
+                                   {% if user.postal_code %}value="{{ user.postal_code }}"{% endif %}
+                                   aria-label="Username"
+                                   aria-describedby="basic-addon1" name="postal_code">
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text responsive-3-17" id="basic-addon1">شماره تماس</span>
+                    <input type="text" class="form-control responsive-3-17" value="{{ user.phone }}" aria-label="Username"
+                           aria-describedby="basic-addon1" name="phone">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text responsive-3-17">آدرس</span>
+                    <textarea class="form-control responsive-3-17" aria-label="With textarea"
+                              name="address">{% if user.address %}{{ user.address }}{% endif %}</textarea>
+                </div>
+                <div class="divider-12 text-center mt-3 responsive-3-17">
+                    <button type="submit" class="btn btn-outline-success responsive-3-17">تغییر اطلاعات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="divider-12 parent-float-fix" data-bs-theme="dark">
+    <div class="divider-12 float-right bg-dark px-2 py-2 mt-2" style="border-radius: 12px">
+        <div class="parent-float-fix my-2 ">
+            <form method="post" action="{% url 'accounts:change_password_profile' %}">{% csrf_token %}
+                <div class="input-group mb-3">
+                    <span class="input-group-text responsive-3-17" id="basic-addon1">رمز قبلی</span>
+                    <input type="password" class="form-control responsive-3-17" aria-label="Username"
+                           aria-describedby="basic-addon1" name="old_password">
+                </div>
+                <div class="divider-12 parent-float-fix">
+                    <div class="float-left responsive-2-12" style="width: 49%">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text responsive-3-17" id="basic-addon1">رمز جدید</span>
+                            <input type="password" class="form-control responsive-3-17" aria-label="Username"
+                                   aria-describedby="basic-addon1" name="new_password1">
+                        </div>
+                    </div>
+                    <div class="float-left" style="height: 1px; width: 2%"></div>
+                    <div class="float-left responsive-2-12" style="width: 49%">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text responsive-3-17" id="basic-addon1">تایید رمز جدید</span>
+                            <input type="password" class="form-control responsive-3-17" aria-label="Username"
+                                   aria-describedby="basic-addon1" name="new_password2">
+                        </div>
+                    </div>
+                    <div class="divider-12 text-center">
+                        <button type="submit" class="btn btn-outline-success responsive-3-17">تفییر رمز</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

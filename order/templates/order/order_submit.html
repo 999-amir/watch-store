@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load product_template_filter %}
+{% block title %}{{ request.user.l_name }}{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/carts.css' %}">{% endblock %}
+{% block body_css %}background-image: url('{% static 'img/lines_img.jpg' %}'); background-size:
+    cover; background-attachment: fixed{% endblock %}
+
+{% block content %}
+    <div class="parent-float-fix divider-12 mt-5" style="direction: rtl">
+        <div class="float-right divider-4 responsive-3-1">
+
+            <div class="parent-float-fix divider-12">
+                <div class="divider-12 float-right p-2 px-3 bg-dark text-light" style="border-radius: 12px">
+                    <div class="parent-float-fix divider-12">
+                        <div class="divider-3 float-right">
+                            <img class="float-right responsive-3-3" src="https://hm-watch-1.s3.ir-thr-at1.arvanstorage.ir/static/profile.jpg" alt="" width="50px"
+                                 height="50px" style="border-radius: 2rem">
+                        </div>
+                        <div class="divider8 float-left">
+                            <h6 class="responsive-3-2">{{ request.user.f_name }} {{ request.user.l_name }}</h6>
+                            <p class="mb-2">شماره تمای: {{ request.user.phone }}</p>
+                        </div>
+                    </div>
+                </div>
+                <form action="{% url 'order:create_order' %}" method="post">{% csrf_token %}
+                    <div class="divider-12 float-right p-2 px-3 mt-2 bg-dark text-light" style="border-radius: 12px">
+                        <!-- form for who give product -->
+                        <p>نام:
+                            <input class="form-control bg-dark text-light responsive-3-7" name="gp_f_name" type="text"
+                                   value="{{ request.user.f_name }}">
+                        </p>
+                        <p>نام خانوادگی:
+                            <input class="form-control bg-dark text-light responsive-3-7" name="gp_l_name" type="text"
+                                   value="{{ request.user.l_name }}">
+                        </p>
+                        <p>شماره تماس:
+                            <input class="form-control bg-dark text-light responsive-3-7" name="gp_phone" type="text"
+                                   value="{{ request.user.phone }}">
+                        </p>
+                        <p>کد پستی:
+                            <input class="form-control bg-dark text-light responsive-3-7" name="gp_postal_code" type="text"
+                                   {% if request.user.postal_code %}value="{{ request.user.postal_code }}"{% endif %}>
+                        </p>
+                        <p>آدرس:
+                            <textarea class="form-control bg-dark text-light responsive-3-7" name="gp_address"
+                                      type="text">{% if request.user.postal_code %}
+                                {{ request.user.address }}{% endif %}</textarea>
+                        </p>
+                        <!-- end form for who give product -->
+                    </div>
+                    <div style="border-radius: 12px"
+                         class="btn-group-vertical divider-12 float-right p-2 px-3 mt-2 bg-dark text-light" role="group"
+                         aria-label="Vertical button group">
+                        {% if carts %}
+                            {% if perms.order.add_ordermodel %}
+                                <button type="submit" class="btn btn-dark responsive-3-2" style="color: chartreuse">پرداخت</button>
+                            {% endif %}
+                        {% endif %}
+                        <a href="{% url 'order:show_order' %}" type="button" class="btn btn-dark responsive-3-2">مرحله قبل</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="float-right divider-7 mx-3 mb-2 bg-dark p-2 responsive-3-5" style="border-radius: 12px">
+            {% include 'order/order.html' %}
+        </div>
+        <div class="float-right divider-3 mx-3 mb-5 bg-dark p-2 responsive-3-15" style="border-radius: 12px">
+            <!-- coupon form -->
+            <form action="{% url 'order:coupon_order' %}" method="post">
+                {% csrf_token %}
+                <div class="parent-float-fix divider-12">
+                    <div class="float-right">
+                        <input class="form-control bg-dark text-light responsive-3-7 responsive-3-14" name="coupon">
+                    </div>
+                    <div class="float-right responsive-3-16" style="margin-right: 2%; width: 26%">
+                        <button type="submit" class="btn btn-outline-info w-100 responsive-3-7">کد تخفیف</button>
+                    </div>
+                </div>
+            </form>
+            <!-- coupon form -->
+        </div>
+    </div>
+{% endblock %}

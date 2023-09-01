@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}reset password{% endblock %}
+
+{% block content %}
+    <div class="modal show"
+         style="display: block; background-image: url('{% static 'img/lines_img.jpg' %}'); background-size: cover"
+         tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" style="direction: rtl">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-light">
+                    <h5 class="modal-title">رمز عبور جدید</h5>
+                </div>
+                <div class="modal-body bg-dark text-light">
+
+                    <form action="" method="post" novalidate>
+                        {% csrf_token %}
+
+                        <p>
+                            <label for="id_new_password1">رمز عبور جدید:</label>
+                            <input type="password" name="new_password1" autocomplete="new-password" required=""
+                                   id="id_new_password1" class="form-control bg-dark text-light">
+
+                            <span class="helptext"></span></p>
+                        <p>
+                            <label for="id_new_password2">تایید رمز عبور جدید:</label>
+                            <input type="password" name="new_password2" autocomplete="new-password" required=""
+                                   id="id_new_password2" class="form-control bg-dark text-light">
+                        </p>
+
+
+                        <button type="submit" class="btn btn-outline-success w-100">تایید</button>
+                    </form>
+                    <a href="{% url 'product:products' %}" class="btn btn-outline-danger w-100 mt-1">لغو</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

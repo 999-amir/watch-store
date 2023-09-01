@@ -1,0 +1,55 @@
+{% load product_template_filter %}
+{% load humanize %}
+
+<div class="parent-float-fix my-2">
+    {% for wr in same_brand_watches %}
+        <a href="{{ wr.get_absolute_url }}" style="color: unset">
+            <div class="float-left my-2">
+                <div class="container">
+                    <div class="box">
+                        {% for img in wr.rel_watch_images.all %}
+                            {% if img.is_main %}
+                                <img src="{{ img.image.url }}" height="60%" class="card-img-top rounded"
+                                     style="object-fit: cover;{% if not wr.is_required %} filter: grayscale(100%){% endif %}"
+                                     alt="{{ wr.brand }}-{{ wr.name }}">
+                            {% endif %}
+                        {% endfor %}
+                        <div>
+                            {% if wr.is_required %}
+                                {% if wr.lowest_quantity %}
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger responsive-9">
+                            {{ wr.lowest_quantity }}
+                        </span>
+                                {% endif %}
+                            {% endif %}
+                            <strong class="{% if wr.is_required %}text-warning{% else %}text-secondary{% endif %}">{{ wr.brand }} {{ wr.name }}</strong>
+                            {% if wr.is_required %}
+                                <p class="text-light">
+                                    {{ wr.min_price|intcomma }} TMN
+                                </p>
+                            {% else %}
+                                <p class="text-danger">
+                                    sold out
+                                </p>
+                            {% endif %}
+                            <span class="text-light responsive-7">motor system : {{ wr.system }}</span>
+                            {% if wr.biggest_discount %}
+                                {% if wr.is_required %}
+                                    <span class="badge text-bg-secondary">{{ wr.biggest_discount }}%</span>
+                                {% endif %}
+                            {% endif %}
+                            {% if wr.is_required %}
+                                <div class="parent-float-fix">
+                                    {% for c in wr.rel_watch_variants.all %}
+                                        <div class="float-left divider-2 responsive-8"
+                                             style="background-color: #{{ c.face_color.hex_color }}; height: 4px; margin-right: 5px"></div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>

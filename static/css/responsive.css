@@ -1,0 +1,225 @@
+/*product view*/
+@media only screen and (orientation: portrait) {
+    .responsive-1 {
+        margin: 0 !important;
+        max-width: 100%;
+        font-size: 38px;
+    }
+
+    .responsive-2 {
+        font-size: 3rem;
+    }
+
+    .responsive-3 {
+        width: 42%;
+        height: 5rem;
+    }
+
+    .responsive-4 {
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .responsive-5 {
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .responsive-6 a {
+        font-size: 3rem;
+        padding: 0 1rem 0 1rem;
+    }
+
+    .responsive-7 {
+        font-size: 2rem !important;
+    }
+
+    .responsive-8 {
+        height: 16px !important;
+    }
+
+    .responsive-9 {
+        font-size: 30px !important;
+    }
+}
+
+/*detail view*/
+@media only screen and (orientation: portrait) {
+    .responsive-2-1 {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .responsive-2-2 {
+        height: 37rem !important;
+    }
+
+    .responsive-2-3 {
+        width: 10rem !important;
+        height: 10rem !important;
+    }
+
+    .responsive-2-4 {
+        font-size: 40px !important;
+        padding: 0 0 1rem 0 !important;
+    }
+
+    .responsive-2-5 {
+        width: 4rem !important;
+        height: 4rem !important;
+    }
+
+    .responsive-2-6 {
+        font-size: 3rem !important;
+        margin: 0 0.5rem !important;
+    }
+
+    .responsive-2-7 {
+        width: 90% !important;
+    }
+
+    .responsive-2-8 {
+        font-size: 36px !important;
+    }
+
+    .responsive-2-9 {
+        width: 96%;
+    }
+
+    .responsive-2-10 {
+        font-size: 2rem;
+    }
+
+    .responsive-2-11 {
+        height: 16rem !important;
+    }
+
+    .responsive-2-12 {
+        width: 100% !important;
+    }
+
+    .responsive-2-13 {
+        width: 47% !important;
+    }
+}
+
+/*profile view*/
+@media only screen and (orientation: portrait) {
+    .responsive-3-1 {
+        width: 100%;
+        font-size: 2rem !important;
+    }
+
+    .responsive-3-2 {
+        font-size: 3rem;
+    }
+
+    .responsive-3-3 {
+        width: 55%;
+        height: 60%;
+    }
+
+    .responsive-3-4 {
+        font-size: 2rem;
+    }
+
+    .responsive-3-5 {
+        width: 100%;
+        margin: 0 !important;
+        margin-top: 10px !important;
+    }
+
+    .responsive-3-6 {
+        font-size: 35px;
+        width: 101%;
+    }
+
+    .responsive-3-7 {
+        font-size: 2rem;
+    }
+
+    .responsive-3-8 {
+        background-color: #53917E;
+    }
+
+    .responsive-3-9 {
+        background-color: #6D1A36;
+    }
+
+    .responsive-3-10 {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .responsive-3-11 {
+        padding: 9px;
+    }
+
+    .responsive-3-12 {
+        height: 20rem;
+    }
+
+    .responsive-3-13 {
+        height: 12px !important;
+    }
+
+    .responsive-3-14 {
+        width: 27rem !important;
+    }
+
+    .responsive-3-15 {
+        width: 100%;
+        margin: 0 !important;
+        margin-top: 1rem !important;
+        margin-bottom: 2rem !important;
+    }
+
+    .responsive-3-16 {
+        width: 50% !important;
+    }
+
+    .responsive-3-17 {
+        font-size: 31px;
+    }
+}
+
+/*message*/
+@media only screen and (orientation: portrait) {
+    .responsive-4-1 {
+        font-size: 40px;
+        width: 100%;
+    }
+
+    .responsive-4-2 {
+        width: 70%;
+    }
+}
+
+/*navabar*/
+@media only screen and (orientation: portrait) {
+    .responsive-10 {
+        font-size: 3rem;
+    }
+
+    .responsive-11 {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .responsive-5-1 {
+        width: 57rem;
+        margin: 0 0 0 2%;
+    }
+    .responsive-5-1-1 {
+        width: 57rem;
+    }
+    .responsive-5-2 label {
+        font-size: 2.5rem;
+    }
+    .responsive-5-2 {
+        font-size: 2.5rem !important;
+    }
+    .responsive-5-3 {
+        font-size: 3rem;
+    }
+}

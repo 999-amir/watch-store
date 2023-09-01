@@ -1,0 +1,55 @@
+<div class="parent-float-fix text-light px-2">
+    <div class="divider-4 float-right my-2">برند</div>
+    <div class="divider-8 float-right my-2">{{ watch.brand }}</div>
+</div>
+<div class="parent-float-fix text-light px-2">
+    <div class="divider-4 float-right my-2">مدل</div>
+    <div class="divider-8 float-right my-2">{{ watch.name }}</div>
+</div>
+<div class="divider-12" style="height: 2px; background-color: #68B0AB"></div>
+<div class="parent-float-fix text-light px-2">
+    <div class="divider-4 float-right my-2">نوع موتور ساعت</div>
+    <div class="divider-8 float-right my-2">{{ watch.system }}</div>
+</div>
+<div class="divider-12" style="height: 2px; background-color: #68B0AB"></div>
+<div class="parent-float-fix text-light px-2">
+    <div class="divider-4 float-right my-2">جنس بدنه</div>
+    <div class="divider-8 float-right my-2">{{ watch.face_material }}</div>
+</div>
+<div class="divider-12" style="height: 2px; background-color: #68B0AB"></div>
+<div class="parent-float-fix text-light px-2">
+    <div class="divider-4 float-right my-2">جنس بند</div>
+    <div class="divider-8 float-right my-2">{{ watch.band_material }}</div>
+</div>
+<div class="divider-12" style="height: 2px; background-color: #68B0AB"></div>
+{% if watch.is_required %}
+    <div class="parent-float-fix text-light px-2">
+        <div class="divider-4 float-right my-2">رنگ بدنه</div>
+        <div class="divider-8 float-right my-2">
+
+            <div class="radio-button-container parent-float-fix">
+
+                <form action="" method="get">
+                    <div>
+                        {% for fc in watch.rel_watch_variants.all %}
+                            <div class="radio-button float-left">
+                                <input name="color_id" value="{{ fc.face_color.id }}" type="radio" class="radio-button__input" onchange="this.form.submit()"
+                                       id="radio{{ fc.face_color.id }}"
+                                       style="background-color: #{{ fc.face_color.hex_color }};box-shadow: 0 0 20px #{{ fc.face_color.hex_color }}"
+                                       {% if fc.face_color.id == selected_watch.face_color.id %}checked{% endif %}>
+                                <label class="radio-button__label responsive-2-8" for="radio{{ fc.face_color.id }}"
+                                       style="color: #{{ fc.face_color.hex_color }}">
+                                    <span class="radio-button__custom"></span>
+                                    {{ fc.face_color.color_name }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="divider-12" style="height: 2px; background-color: #68B0AB"></div>
+{% endif %}

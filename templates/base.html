@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% block img_title %}{% endblock %}
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+            crossorigin="anonymous"></script>
+    <!-- css -->
+    <link rel="stylesheet" href="{% static 'css/screen_divider.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/messages.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    {% block css %}{% endblock %}
+</head>
+
+<body class="divider-12" style="background-color: #1B1B1E; {% block body_css %}{% endblock %}">
+{% include 'incs/navbar.html' %}
+{% include 'messages.html' %} {# colors: msg-bg-|info,success,warning,danger| #}
+<div class="container responsive-1">
+    {% block content %}{% endblock %}
+</div>
+{% include 'incs/modal_signup_login.html' %}
+
+<!-- js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% block script %}{% endblock %}
+<script>
+    setTimeout(function delete_message(params) {
+        document.getElementById('js-messages').remove()
+    }, 6000)
+</script>
+<!-- ajax cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- end js -->
+</body>
+</html>

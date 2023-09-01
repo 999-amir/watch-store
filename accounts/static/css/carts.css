@@ -1,0 +1,89 @@
+.A-carousel-image{
+    object-fit: cover;
+    border-radius: 1rem;
+}
+/* for cards */
+.container {
+  position: relative;
+  font-family: sans-serif;
+}
+.container::before, .container::after {
+  content: "";
+  position: absolute;
+}
+.container::before {
+  border-radius: 50%;
+  width: 6rem;
+  height: 6rem;
+  top: 30%;
+  right: 7%;
+}
+.container::after {
+  content: "";
+  position: absolute;
+  height: 3rem;
+  top: 8%;
+  right: 5%;
+  border: 1px solid;
+}
+.container .box {
+  width: 9.875em;
+  height: 12.875em;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.074);
+  border: 1px solid rgba(255, 255, 255, 0.222);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-radius: .7rem;
+  transition: all ease .3s;
+}
+.container .box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.container .box .title {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: .1em
+}
+.container .box div strong {
+  display: block;
+  margin-bottom: .5rem;
+}
+.container .box div p {
+  margin: 0;
+  font-size: .9em;
+  font-weight: 300;
+  letter-spacing: .1em;
+}
+.container .box div span {
+  font-size: .7rem;
+  font-weight: 300;
+}
+.container .box div span:nth-child(3) {
+  font-weight: 500;
+  margin-right: .2rem;
+}
+.container .box:hover {
+  box-shadow: 0px 0px 20px 1px #ffbb763f;
+  border: 1px solid rgba(255, 255, 255, 0.454);
+}
+/* carousel in product detail */
+.card {
+ background-image: linear-gradient(163deg, #000000 0%, #000000 100%);
+ border-radius: 1rem;
+ transition: all .3s;
+}
+.card2 {
+ background-color: #1a1a1a;
+ border-radius: 1rem;
+ transition: all .2s;
+}
+.card2:hover {
+ transform: scale(0.98);
+ border-radius: 20px;
+}
+.card:hover {
+ box-shadow: 0px 0px 30px 1px #342E37;
+}

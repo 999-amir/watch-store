@@ -1,0 +1,61 @@
+{% load static %}
+
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark responsive-2" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand responsive-2" href="{% url 'product:products' %}">محصولات</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon responsive-5"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+
+
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'order:show_order' %}" class="nav-link active">
+                            {{ user.l_name }} {% if carts %}<span style="color: chartreuse"><span
+                                class="class-ajax-navbar-cart">{{ carts|length }}</span></span>{% endif %}
+                        </a>
+                    {% else %}
+                        <a type="button" class="nav-link active" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            ورود و ثبت نام
+                        </a>
+                    {% endif %}
+
+
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:logout' %}">خروج</a>
+                    </li>
+                {% else %}
+                    {% if carts %}
+                        <a style="color: chartreuse" href="{% url 'order:show_order' %}" class="nav-link active">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                 class="bi bi-bag-fill responsive-11" viewBox="0 0 16 16">
+                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"/>
+                            </svg>
+                            <span class="h5 class-ajax-navbar-cart responsive-10">{{ carts|length }}</span>
+                        </a>
+                    {% endif %}
+                {% endif %}
+            </ul>
+
+            <form class="d-flex" method="get" action="{% url 'product:products' %}">
+                <input class="form-control me-2 responsive-2" type="search" placeholder="جست و جو" aria-label="Search"
+                       name="search"
+                        {% if last_search %} value="{{ last_search }}{% endif %}">
+                <button class="button responsive-3" type="submit">
+                    <svg class="svgIcon responsive-4" viewBox="0 0 512 512" height="1em"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path>
+                    </svg>
+                    گشتن
+                </button>
+            </form>
+
+        </div>
+    </div>
+</nav>

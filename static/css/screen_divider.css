@@ -1,0 +1,25 @@
+/* parent-float-fix --> float & divider */
+/* there is a class to use float without outline texts
+this class should be used in parent element that have child with float class */
+.parent-float-fix{
+    content: "";
+    clear: both;
+    display: block;
+}
+/* child elements for parent-float-fix */
+.float-right{float: right;}
+.float-left{float: left;}
+/* there are 12 width divider for child elements
+ that summation should be 12 */
+.divider-1{width: 8.33%;}
+.divider-2{width: 16.66%;}
+.divider-3{width: 25%;}
+.divider-4{width: 33.33%;}
+.divider-5{width: 41.66%;}
+.divider-6{width: 50%;}
+.divider-7{width: 58.33%;}
+.divider-8{width: 66.66%;}
+.divider-9{width: 75%;}
+.divider-10{width: 83.33%;}
+.divider-11{width: 91.66%;}
+.divider-12{width: 100%;}

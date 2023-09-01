@@ -1,0 +1,162 @@
+<form>
+    <ul class="nav justify-content-end mt-3">
+        <li class="nav-item">
+            <a class="nav-link text-warning" href="#" type="button" data-bs-toggle="offcanvas"
+               data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">فیلترها</a>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link text-light" name="sorted_sale" value="mostSale">پرفروش ترین</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link text-light" name="sorted_discount" value="mostDiscount">بیشترین تخفیف</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link text-light" name="sorted_price" value="chp" type="submit">ارزان ترین</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link text-light" name="sorted_price" value="exp" type="submit">گران ترین</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link text-light" name="sorted_seen" value="mostSeen" type="submit">پر بازدیدترین</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link text-light" name="sorted_favorite" value="mostFav" type="submit">محبوب ترین</button>
+        </li>
+    </ul>
+
+
+    <div style="direction: rtl" class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header bg-dark text-light">
+            <h5 class="offcanvas-title bg-dark text-light" id="offcanvasRightLabel">فیلتر ها</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body bg-dark text-light">
+
+
+            <form action="" method="get">
+                <div class="mb-2 text-info">بر اساس قیمت:</div>
+                <div>
+                    <label class="mb-2">حداقل قیمت:
+                        <input class="form-control bg-dark text-light" type="number" name="min_price"
+                               minlength="{{ min_price_f }}">
+                    </label>
+                    <label>حداکثر قیمت:
+                        <input class="form-control bg-dark text-light" type="number" name="max_price"
+                               maxlength="{{ max_price_f }}">
+                    </label>
+                </div>
+                <hr class="text-info">
+                <div class="mb-2 text-info">برند:</div>
+                <div>
+                    {% for brand in brands %}
+                        <div class="form-check form-check-inline">
+                            <input name="brand" class="form-check-input bg-dark" type="checkbox" id="b{{ brand.id }}"
+                                   value="{{ brand.id }}">
+                            <label class="form-check-label" for="b{{ brand.id }}">{{ brand.Brand }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <hr class="text-info">
+                <div class="mb-2 text-info">رنگ:</div>
+                <div>
+                    {% for color in colors %}
+                        <div class="form-check form-check-inline">
+                            <input name="color" class="form-check-input bg-dark" type="checkbox" id="c{{ color.id }}"
+                                   value="{{ color.id }}">
+                            <label class="form-check-label" for="c{{ color.id }}">{{ color.color_name }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <hr class="text-info">
+                <div class="mb-2 text-info">نوع موتور:</div>
+                <div>
+                    {% for system in systems %}
+                        <div class="form-check form-check-inline">
+                            <input name="system" class="form-check-input bg-dark" type="checkbox"
+                                   id="s{{ system.id }}"
+                                   value="{{ system.id }}">
+                            <label class="form-check-label" for="s{{ system.id }}">{{ system.system }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <hr class="text-info">
+                <div class="mb-2 text-info">فرم بدنه:</div>
+                <div>
+                    {% for face_shape in face_shapes %}
+                        <div class="form-check form-check-inline">
+                            <input name="face_shape" class="form-check-input bg-dark" type="checkbox"
+                                   id="fs{{ face_shape.id }}"
+                                   value="{{ face_shape.id }}">
+                            <label class="form-check-label" for="fs{{ face_shape.id }}">{{ face_shape.shape }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <hr class="text-info">
+                <div class="mb-2 text-info">جنس بدنه:</div>
+                <div>
+                    {% for face_material in face_materials %}
+                        <div class="form-check form-check-inline">
+                            <input name="face_material" class="form-check-input bg-dark" type="checkbox"
+                                   id="fm{{ face_material.id }}"
+                                   value="{{ face_material.id }}">
+                            <label class="form-check-label"
+                                   for="fm{{ face_material.id }}">{{ face_material.face_material }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <hr class="text-info">
+                <div class="mb-2 text-info">جنس بند:</div>
+                <div>
+                    {% for band_material in band_materials %}
+                        <div class="form-check form-check-inline">
+                            <input name="band_material" class="form-check-input bg-dark" type="checkbox"
+                                   id="bm{{ band_material.id }}"
+                                   value="{{ band_material.id }}">
+                            <label class="form-check-label"
+                                   for="bm{{ band_material.id }}">{{ band_material.band_material }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <hr class="text-info">
+                <div class="mb-2 text-info">نوع قفل بند ساعت:</div>
+                <div>
+                    {% for band_lock in band_locks %}
+                        <div class="form-check form-check-inline">
+                            <input name="band_lock" class="form-check-input bg-dark" type="checkbox"
+                                   id="bl{{ band_lock.id }}"
+                                   value="{{ band_lock.id }}">
+                            <label class="form-check-label" for="bl{{ band_lock.id }}">{{ band_lock.lock }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <br>
+                <div class="w-100">
+                    <a href="{% url 'product:products' %}" class="btn btn-outline-warning divider-5">پاک کردن فیلتر ها</a>
+                    <button type="submit" class="btn btn-outline-info divider-6">فیلتر</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

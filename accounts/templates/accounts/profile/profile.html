@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load product_template_filter %}
+{% block title %}{{ request.user.l_name }}{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/carts.css' %}">{% endblock %}
+{% block body_css %}background-image: url(
+    '{% static 'img/lines_img.jpg' %}'
+    ); background-size:
+    cover; background-attachment: fixed{% endblock %}
+
+{% block content %}
+    <div class="parent-float-fix divider-12 mt-5" style="direction: rtl">
+        <div class="float-right divider-4 responsive-3-1">
+            <div class="parent-float-fix divider-12">
+                <div class="divider-12 float-right p-2 px-3 bg-dark text-light" style="border-radius: 12px">
+                    <div class="parent-float-fix divider-12">
+                        <div class="divider-3 float-right">
+                            <img class="float-right responsive-3-3" src="https://hm-watch-1.s3.ir-thr-at1.arvanstorage.ir/static/profile.jpg" alt="" width="50px"
+                                 height="50px" style="border-radius: 2rem">
+                        </div>
+                        <div class="divider8 float-left">
+                            <h6 class="responsive-3-2">{{ request.user.f_name }} {{ request.user.l_name }}</h6>
+                            <p class="mb-2">شماره تماس: {{ request.user.phone }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider-12 float-right p-2 px-3 mt-2 bg-dark text-light" style="border-radius: 12px">
+                    <p><span class="text-info">شماره تماس گیرنده: </span>{{ request.user.phone }}</p>
+                    <hr>
+                    <p><span class="text-info">ایمیل گیرنده: </span>{% if request.user.email == None %}---------{% else %}
+                        {{ request.user.email }}{% endif %}</p>
+                    <hr>
+                    <p class="mb-2"><span class="text-info">آدرس گیرنده: </span>
+                        {% if request.user.address == '' or request.user.address == None %}
+                            ---------{% else %}{{ request.user.address }}{% endif %}</p>
+                    <hr>
+                    <p><span class="text-info">کد پستی: </span>{% if request.user.postal_code == None %}
+                        ---------{% else %}{{ request.user.postal_code }}{% endif %}</p>
+                </div>
+                {% if user.is_authenticated %}
+                    <div style="border-radius: 12px"
+                         class="btn-group-vertical divider-12 float-right p-2 px-3 mt-2 bg-dark text-light" role="group"
+                         aria-label="Vertical button group">
+                        {% if is_bookmark_page or is_user_orders_page or is_change_profile_page %}
+                            {% if carts %}
+                                <a href="{% url 'order:show_order' %}" type="button" class="btn btn-dark responsive-3-4">سفارشات</a>
+                            {% endif %}
+                        {% else %}
+                            {% if carts %}
+                                <a id="id-ajax-buy-button" href="{% url 'order:submit_order' %}" type="button"
+                                   class="btn btn-dark responsive-3-4"
+                                   style="color: chartreuse">خرید</a>
+                            {% endif %}
+                        {% endif %}
+                        <a type="button" class="btn btn-dark responsive-3-4" href="{% url 'accounts:show_change_profile' %}"
+                           {% if is_change_profile_page %}style="color: chartreuse" {% endif %}>تغییر اطلاعات پروفایل</a>
+                        {% if user_orders %}
+                            <a type="button" class="btn btn-dark responsive-3-4" href="{% url 'order:last_order' %}"
+                               {% if is_user_orders_page %}style="color: chartreuse" {% endif %}>سفارتشات قبلی</a>
+                        {% endif %}
+                        <a type="button" class="btn btn-dark responsive-3-4" href="{% url 'accounts:bookmark' %}"
+                           {% if is_bookmark_page %}style="color: chartreuse" {% endif %}>ذخیره شده</a>
+                        <a type="button" class="btn btn-dark text-danger responsive-3-4" href="{% url 'accounts:send_otp_delete' %}">حذف حساب</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="float-right divider-7 mx-3 mb-5 responsive-3-5">
+            {% if is_bookmark_page %}
+                {% include 'accounts/profile/incs/bookmark.html' %}
+            {% elif is_user_orders_page %}
+                {% include 'accounts/profile/incs/last_order.html' %}
+            {% elif is_change_profile_page %}
+                {% include 'accounts/profile/incs/change_profile_info.html' %}
+            {% else %}
+                {% include 'order/order.html' %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'js/ajax.js' %}"></script>
+{% endblock %}

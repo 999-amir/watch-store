@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}products{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/product.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% include 'product/incs/products/carousel.html' %}
+    <hr class="text-warning bold">
+    {% include 'product/incs/products/filters.html' %}
+    {% include 'product/incs/products/cards.html' %}
+
+    <div class="divider-12 parent-float-fix">
+        <div class="divider-5 float-left" style="height: 1px"></div>
+        <div class="divider-2 float-left">
+
+
+            <nav aria-label="Page navigation example" data-bs-theme="dark" class="responsive-6">
+                <ul class="pagination justify-content-center">
+                    {% if watches_required.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ watches_required.previous_page_number }}&{{ page_url_data }}"><<</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="?page={{ watches_required.previous_page_number }}&{{ page_url_data }}">{{ watches_required.previous_page_number }}</a></li>
+                    {% endif %}
+                    <li class="page-item active"><a class="page-link">{{ watches_required.number }}</a></li>
+                    {% if watches_required.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ watches_required.next_page_number }}&{{ page_url_data }}">{{ watches_required.next_page_number }}</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ watches_required.next_page_number }}&{{ page_url_data }}">>></a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+
+        </div>
+        <div class="divider-5 float-left" style="height: 1px"></div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/product.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}reset password{% endblock %}
+
+{% block content %}
+    <div class="modal show"
+         style="display: block; background-image: url('{% static 'img/lines_img.jpg' %}'); background-size: cover"
+         tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered responsive-5-1">
+            <div class="modal-content responsive-5-1" style="direction: rtl">
+                <div class="modal-header bg-dark text-light responsive-5-1-1">
+                    <h5 class="modal-title responsive-5-2">حذف حساب کاربری</h5>
+                </div>
+                <div class="modal-body bg-dark text-light">
+                    <form action="" method="post" novalidate>
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-outline-success w-100 responsive-5-2">تایید</button>
+                    </form>
+                    <a href="{% url 'order:show_order' %}" class="btn btn-outline-danger w-100 mt-1 responsive-5-2">لغو</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

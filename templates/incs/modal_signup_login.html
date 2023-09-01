@@ -1,0 +1,86 @@
+{% load static %}
+<div style="background-image: url('{% static 'img/lines_img.jpg' %}');background-size: cover" class="modal fade"
+     id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered responsive-5-1">
+        <div class="modal-content bg-dark text-light responsive-5-1">
+            <div class="modal-header responsive-5-1-1">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item bg-dark text-light" style="direction: rtl">
+                        <h2 class="accordion-header bg-dark text-light">
+                            <button class="accordion-button bg-dark text-info responsive-5-2" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                ورود
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show bg-dark text-light"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body bg-dark text-light">
+
+                                <form action="{% url 'accounts:login' %}" method="post" novalidate class=" responsive-5-2">
+                                    {% csrf_token %}
+                                    {{ login_form.as_p }}
+                                    <a class="link responsive-5-2" href="{% url 'accounts:reset_password' %}">فراموشی رمز عبور?</a>
+                                    <button type="submit" class="btn btn-success w-100 mt-2 responsive-5-2">تایید</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-dark text-light" style="direction: rtl">
+                        <h2 class="accordion-header bg-dark text-light">
+                            <button class="accordion-button collapsed bg-dark text-info responsive-5-2" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                عضویت
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse bg-dark text-light"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body bg-dark text-light">
+
+
+                                <form action="{% url 'accounts:signup' %}" method="post" novalidate class="responsive-5-2">
+                                    {% csrf_token %}
+                                    {{ signup_form.as_p }}
+                                    <button type="submit" class="btn btn-success w-100 responsive-5-2">تایید</button>
+                                </form>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% if verify_code_form %}
+    <div class="modal show" style="display: block; background-image: url({% static 'images/lines_img.jpg' %}); background-size: cover" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered responsive-5-1">
+            <div class="modal-content responsive-5-1">
+                <div class="modal-header bg-dark text-light responsive-5-1-1">
+                    <h5 class="modal-title responsive-5-2">لطفا کد تاییدی که به شما ارسال کردیم را وارد کنید</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-dark text-light">
+
+                    <form action="{% url 'accounts:verify_code' %}" method="post">
+                        {% csrf_token %}
+                        {{ verify_code_form.as_p }}
+                        <button type="submit" class="btn btn-outline-success w-100 responsive-5-2">تایید</button>
+                    </form>
+                    <a href="{% url 'accounts:cancel_signup' %}" class="btn btn-outline-danger w-100 mt-1 responsive-5-2">لغو</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
